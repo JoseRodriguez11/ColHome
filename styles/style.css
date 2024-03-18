@@ -956,7 +956,10 @@ details[open] summary::before{
         padding-bottom: 20px;
     
     }
-
+    .card-container{
+        margin-top: 100px;
+        padding: 0 5px;
+    }
     .card {
         width: 100%;
     }

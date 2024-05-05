@@ -707,25 +707,56 @@ details[open] summary::before{
 .single-house-information{
  display: flex;
  flex-direction: column;
- max-width: 50vw;
+ max-width: 60vw;
  
 }
 
 
 .content-slider{
     position: relative;
- 
+    max-width: 60vw;
+    margin: 0 auto;
 }
 
-.content-slider .slider{
-    position: relative;
+.slider{
+  display: flex;
+  aspect-ratio: 16 / 9;
+  overflow-x: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  box-shadow: 0 .25rem .5rem #000000;
+  border-radius: 0.5rem;
 }
 .slider img{
-    max-width: 50vw;
-    border-radius: 30px;
-    box-shadow:  0 0 20px rgba(0, 0, 0, 0.5) ;
-    margin-bottom: 10px;
+    flex: 1 0 100%;
+    scroll-snap-align: none;
+    object-fit: cover;
 }
+
+.slider-nav{
+    display: flex;
+    column-gap: 2rem;
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.slider-nav a{
+    width: .7rem;
+    height: .7rem;
+    border-radius: 50%;
+    background-color: white;
+    opacity: .75;
+    transition: opacity ease 250ms;
+}
+
+.slider-nav a:hover{
+    opacity: 1;
+    background-color:rgb(65, 5, 5) ;
+}
+
 
 .single-house-title {
     display: flex;
@@ -990,9 +1021,9 @@ details[open] summary::before{
         flex-direction: column;
         align-items: center;
     }
-
-    .slider img{
+    .content-slider{
         min-width: 100%;
+        
     }
     .single-house-information{
         min-width: 100%;

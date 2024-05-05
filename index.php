@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColHome</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="menu">
+            <a href="#" class="logo">COLHOME</a>
+            <input type="checkbox" id="menu">
+            <label for="menu">
+                <img src="imgs/menu.png" class="menu-icono" alt="">
+            </label>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="houses.html">Casas</a></li>
+                    <li><a href="about_us.html">Sobre Nosotros</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                    
+                      
+                </ul>
+            </nav>
+            <a class="btn-login" href="login.html" >Login</a>
+        </div>
+        <div class="header">
+            <div class="header-content container">
+                <div class="header-txt">
+                    <h1>Compra venta de casas</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus explicabo ad dolorum? Illum
+                        dolorum iure nisi animi, et vitae tenetur illo, corporis eveniet quia dolor alias doloribus fuga,
+                        distinctio aut.</p>
+                    <a href="houses.html" class="btn-1">Ver más</a>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <main>
+        <section >
+            <div class="title-section">
+                <div class="title-content">
+                    <h2>Encuentra </h2>
+                    <hr>
+                </div>
+            </div>
+            <div  class="information">
+                <div class="information-item">
+                    <i class="fa-solid fa-house"></i>
+                    <h3>+300 Casas</h3>
+                </div>
+                <div class="information-item">
+                    <i class="fa-solid fa-building"></i>
+                    <h3>+500 Apartamentos</h3>
+                </div>
+                <div class="information-item">
+                    <i class="fa-solid fa-house-chimney-window"></i>
+                    <h3>+50 Fincas</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="title-section">
+                <div class="title-content">
+                    <h2>Asesoramiento</h2>
+                    <hr>
+                </div>
+            </div>
+            <div class="content-advice ">
+                <div class="advice-img">
+                    <img id="img-asesor" src="imgs/asesor.jpg" alt="imagen de asesor">
+                </div>
+                <div class="advice-txt">
+                    <h3>Asesores Expertos</h3>
+                    <p>Contamos con los mejores asesores que te pueden ayudar la mejor opcion de vivienda 
+                        que se ajuste tanto a tu presupuesto como a tus necesidades 
+                    </p>
+                    <a href="contact.html" class="btn-1">Contactanos</a>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="title-section">
+                <div class="title-content">
+                    <h2>Viviendas</h2>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="card-container">
+                
+            <?php  include('server/get_homes-index.php');?>
+
+            <?php while($homes =$homes_index->fetch_assoc()) {?>
+
+                <figure class="card">
+                    <div class="card-image">
+                        <img src="imgs/<?php echo $homes['home_image1']; ?>" alt="Imagen">
+                    </div>
+                    <div class="card-info">
+                        <h2><?php echo $homes['home_category']; ?></h2>
+                        <h3>$<?php echo $homes['home_price']; ?></h3>
+                        <h3><?php echo $homes['home_city']; ?></h3>
+                        <h3><?php echo $homes['home_neighborhood']; ?></strong></h3>
+                        <p><strong>Descripción:</strong> <?php echo $homes['home_description']; ?></p>
+                        <a href="<?php echo "single_house.php?home_id=".$homes['home_id'];?>" class="card-btn">Ver</a>
+                    </div>
+                </figure>
+
+            <?php } ?>
+            </div>
+            <a href="houses.html" class="btn">Ver mas </a>
+        </section>
+    </main>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="about_us.html">Sobre nosotro</a></li>
+                        <li><a href="t&c.html">T&C</a></li>
+                        <li><a href="contact.html">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Busquedas</h4>
+                    <ul>
+                        <li><a href="houses.html">Todos los resultados </a></li>
+                        <li><a href="houses.html">Mas Recientes</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Siguenos en </h4>
+                    <div class="social-media">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <script>
+        window.onscroll = function() {scrollFunction()};
+      
+        function scrollFunction() {
+          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("menu").style.top = "0";
+          } else {
+            document.getElementById("menu").style.top = "-40px"; /* Altura de la barra de menú */
+          }
+        }
+    </script>
+
+</body>
+
+</html>

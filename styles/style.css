@@ -577,17 +577,31 @@ details[open] summary::before{
 .content-contact {
     min-height: 110vh;
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
     align-items: center;
+    
 }
 
+.information_contact{
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding-top: 50px;
+    
+}
+.information_contact h3,h4{
+    font-size:20px;
+    padding-top: 10px;
+}
 .content-contact form{
     padding: 50px 55px ;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     text-align: center;
-    width: 400px;
-
+    min-width: 400px;
     
 }
 
@@ -601,9 +615,11 @@ details[open] summary::before{
     color: rgb(65, 5, 5);
     font-size: 14px ;
     font-weight: 600;
+    padding-top: 10px;
 }
 .form-txt-contact a:hover{
     text-decoration: underline;
+    
 }
 .content-contact h2{
     font-size: 35px;
@@ -629,7 +645,12 @@ details[open] summary::before{
     flex-direction: column;
     text-align: left;
 }
-
+.contact-form label {
+    padding-right: 20px;
+}
+.contact-form label input{
+    margin-right: 6px;
+}
 .btn-contact{
     font-size: 16px;
     color: #fffdfc;
@@ -642,6 +663,7 @@ details[open] summary::before{
 .btn-contact:hover{
     background-color: rgb(65, 5, 5);
 }
+
 
 
 /* terminos y condiciones*/

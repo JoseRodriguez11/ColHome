@@ -62,6 +62,7 @@
     <main>
         <section class="container">
             <div class="content-single-house">
+                
             <?php while($home = $home_information->fetch_assoc()) {?>
                 <div class="single-house-information">
                     <div class="content-slider">

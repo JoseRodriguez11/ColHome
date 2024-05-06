@@ -13,8 +13,10 @@ body{
 }
 
 .container {
+    
     max-width: 1200px;
     margin: 0 auto;
+    
 }
 hr{
     width: 50px ;
@@ -24,6 +26,7 @@ hr{
     margin: 5px 0;
     
 }
+
 
 .title-section {
     display: flex;
@@ -67,8 +70,9 @@ hr{
     font-size: 20px;
 }
 
-/*menu */
 
+/********************************************/
+/*menu */
 
 .menu{
     position: fixed;
@@ -135,6 +139,7 @@ hr{
 }
 
 
+/********************************************/
 /*header*/
 
 .header-txt{
@@ -174,8 +179,8 @@ hr{
 
 
 
-
-/* registro e inicio de sesion*/
+/********************************************/
+/* register and loggin*/
 
 
 .wrapper{
@@ -231,6 +236,7 @@ hr{
     color: black;
     text-align: center;
 }
+
 
 .input-box {
     position: relative;
@@ -325,6 +331,7 @@ hr{
     color: rgb(102, 8, 8);
     font-weight: 600;
     padding: 1em ;
+    
 }
 
 .login-register p a:hover{
@@ -332,6 +339,7 @@ hr{
 }
 
 
+/********************************************/
 /* main */
 
 /*informacion*/
@@ -361,6 +369,7 @@ hr{
  
 }
 
+/********************************************/
 /*asesor*/
 .content-advice{
     display: flex;
@@ -397,9 +406,11 @@ hr{
 
 }
 
+/********************************************/
 /* card*/
 
 .card-container {
+    
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -420,7 +431,7 @@ hr{
   }
 .card-image {
     flex: 1 0 100%;
-    max-width: 200px; /* Medidas fijas para la imagen */
+    max-width: 200px; 
     
   } 
 .card-image img {
@@ -452,25 +463,21 @@ hr{
 }
 
 
+/********************************************/
+/* hauses */
 
-/* contenido pagina casas*/
-
-.content-form{
+.content-form-serch{
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: center;
     flex-wrap: wrap;
-    justify-content: space-around;
-    padding-top: 40px
-    
+    justify-content: space-evenly;
+    padding-top: 20px;
+    border-bottom: 1px solid rgb(65, 5, 5);
 }
 
-aside{
-    
-    border-radius: 50px;
-    border: 1px solid black;
-    height: 250px;
+.aside-column{
+    margin-left: 30px;
+    padding-bottom: 10px;
 }
 
 .aside-column h3{
@@ -481,6 +488,14 @@ aside{
     display: block;
     font-size: 19px ;
 }
+.limit-prices{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   font-size: 15px;
+   
+}
+
 
 .aside-column input{
     padding: 8px 18px;
@@ -495,6 +510,7 @@ aside{
     
 }
 
+/********************************************/
 /* paginacion*/
 
 .pagination {
@@ -522,7 +538,8 @@ aside{
   }
 
 
-/* sobre nosotros*/
+/********************************************/
+/* about us*/
 
 .container-details{
     display: flex;
@@ -571,8 +588,85 @@ details[open] summary::before{
     
 }
 
+/********************************************/
+/*account*/
 
-/*contacto*/
+.content-account {
+    min-height: 110vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.information_account{
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding-top: 50px;
+    
+}
+.information_account h3,h4{
+    font-size:20px;
+    padding-top: 10px;
+    
+}
+.content-account form{
+    padding: 50px 55px ;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    text-align: center;
+    min-width: 400px;
+    
+}
+.content-account input,textarea{
+    padding: 10px 10px ;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    border: 2px solid #ece6e6;
+    outline: none;
+}
+
+.input-group-account {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.btn-logout{
+    font-size: 16px;
+    color: #fffdfc;
+    border: 0;
+    border-radius: 25px;
+    background-color: rgb(102, 8, 8);
+    padding: 10px 10px;
+    margin-top: 20px;
+    box-shadow: 0 0 20px rgba(102, 8, 8, .5);
+    cursor: pointer;
+}
+
+.btn-logout:hover{
+    background-color: rgb(65, 5, 5);
+}
+.btn-account{
+    font-size: 16px;
+    color: #fffdfc;
+    border: 0;
+    border-radius: 25px;
+    background-color: rgb(102, 8, 8);
+    box-shadow: 0 0 20px rgba(102, 8, 8, .5);
+    cursor: pointer;
+}
+
+.btn-account:hover{
+    background-color: rgb(65, 5, 5);
+}
+
+/********************************************/
+/*contact*/
 
 .content-contact {
     min-height: 110vh;
@@ -665,8 +759,8 @@ details[open] summary::before{
 }
 
 
-
-/* terminos y condiciones*/
+/********************************************/
+/* T&C*/
 .contact-tc{
     padding: 10px 50px ;
 }
@@ -689,8 +783,8 @@ details[open] summary::before{
     padding-top: 50px;
 }
 
-
-/* vista de un solo producto */
+/********************************************/
+/* single house */
 
 .content-single-house{
     min-height: 100vh;
@@ -817,17 +911,17 @@ details[open] summary::before{
     background: rgb(65, 5, 5);
 }
 
+/********************************************/
 /* footer */
 .row {
     display: flex;
     flex-wrap: wrap;
-    
     justify-content: space-around;
 }
 
 .footer{
     background-color: #140d0d;
-    padding: 70px 0px;
+    padding: 125px 0px;
     margin-top: 30px;
     font-size: 20px  ;
 }
@@ -838,9 +932,10 @@ details[open] summary::before{
 
 .footer-col h4{
     
+    font-size: 25px;
     color: #fffdfc;
     text-transform: capitalize;
-    margin-bottom: 30px ;
+    margin-bottom: 40px ;
     font-weight: 500;
     position: relative;
     
@@ -862,7 +957,7 @@ details[open] summary::before{
 }
 
 .footer-col ul li a{
-    font-size: 16px;
+    font-size: 20px;
     text-transform: capitalize;
     color: #fffdfc;
     font-weight:300 ;
@@ -894,7 +989,7 @@ details[open] summary::before{
     
 }
 
-
+/********************************************/
 /* Dashboard*/
 
 .container-dashboard{
@@ -957,6 +1052,7 @@ details[open] summary::before{
 }
 
 
+/********************************************/
 @media  (max-width:991px){
     .menu{
         padding: 30px;
@@ -1016,6 +1112,8 @@ details[open] summary::before{
     .card {
         width: 100%;
     }
+
+
     .content-single-house{
         display: flex;
         flex-direction: column;

@@ -82,7 +82,7 @@ $stakeholders = $stmt2->get_result();
                     <td><?php echo $stakeholder['stakeholders_contact'] ;?></td>
                     <td><?php echo $stakeholder['stakeholders_state'] ;?></td>
                     
-                    <td><a class="btn-dasboard btn-eliminar" href="update_contact_stakeholder.php?stakeholder_id=<?php echo $stakeholder['stakeholders_id'];?>">contactado</a></td>
+                    <td><a class="btn-dasboard btn-eliminar" href="update_contact_stakeholder.php?stakeholders_id=<?php echo $stakeholder['stakeholders_id'];?>">contactado</a></td>
                     
                     
                 </tr>

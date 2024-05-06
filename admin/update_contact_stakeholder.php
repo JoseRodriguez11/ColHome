@@ -6,10 +6,11 @@
         exit;
     }
 
-    if(isset($_GET['stakeholder_id'])){
+    if(isset($_GET['stakeholders_id'])){
 
         $stakeholders_id = $_GET['stakeholders_id'];
-        $update_status= 'Contactado';
+
+        $update_status= "contactado";
         $stmt = $conn->prepare("UPDATE contact SET stakeholders_state=? WHERE stakeholders_id=?");
         if (!$stmt) {
             die('Error de la consulta SQL: ' . $conn->error);

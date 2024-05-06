@@ -18,7 +18,7 @@
         $stmt->bind_param('si',$update_status,$information_id);
 
         if($stmt->execute()){
-            echo "hola";
+            
             header('location: send_information.php?message=Modificado con exito');
         }else{
             header('location: send_information.php?error=No se pudo modificar intente de nuevo');

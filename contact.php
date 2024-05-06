@@ -1,3 +1,31 @@
+<?php
+    include('server/connection.php');
+
+    if(isset($_POST['contact_user'])){
+        $name = $_POST['name'];
+        $phone = $_POST['phone'];
+        $email = $_POST['email'];
+        $contac = $_POST['contac'];
+        $feeling = $_POST['feeling'];
+
+        $stmt = $conn -> prepare("INSERT INTO contact (stakeholders_name,stakeholders_number,stakeholders_email,stakeholders_interest,stakeholders_contact)
+                                    VALUES (?,?,?,?,?)");
+        $stmt->bind_param('sssss',$name,$phone,$email,$feeling,$contac);
+
+        if($stmt->execute()){
+            header('location: contact.php?message=Registro exitoso Pronto te contactaremos');
+        }else{
+            header('location: contact.php?error=No se pudo realizar el registro');
+        }
+    }
+
+
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -25,8 +53,10 @@
                 <h4>311 xxx xxxx</h4>
                 
             </div>
-            <form  action="">
+            <form  action="contact.php"  method="post">
                 <h2>Dejanos Contactarte</h2>
+                <p style="color: green; font-size:20px;"><?php if(isset($_GET['message'])) {echo $_GET['message'];}?></p>    
+                <p style="color: rgb(102, 8, 8); font-size:20px;"><?php if(isset($_GET['error'])) {echo $_GET['error'];}?></p>    
                 <div class="input-group">
                     <label for="name">Nombre</label>
                     <input type="text" name="name" id="name" placeholder="Nombre">
@@ -40,25 +70,25 @@
                     <div class="contact-form">
                         <h4>¿Como te gustaría ser contactado?</h4>
                         
-                            <label ><input type="checkbox"  name="email" value="Correo" checked>Correo</label>
-                            <label ><input type="checkbox"  name="WhatsApp" value="WhatsApp">WhatsApp</label>
-                            <label ><input type="checkbox" value="llamada">llamada</label>
+                            <label ><input type="radio"  name="contac" value="Correo" checked>Correo</label>
+                            <label ><input type="radio"  name="contac" value="WhatsApp">WhatsApp</label>
+                            <label ><input type="radio" name="contac" value="llamada">llamada</label>
 
                     </div>
 
                     <div class="contact-form">
                         <h4>¿Cual es tu interés?</h4>
                         
-                            <label ><input type="checkbox" value="Compra">Compra</label>
-                            <label ><input type="checkbox" value="venta">venta</label>
-                            <label ><input type="checkbox" value="Asesoramiento" checked>Asesoramiento</label>
+                            <label ><input type="radio" name="feeling" value="Compra">Compra</label>
+                            <label ><input type="radio" name="feeling" value="venta">venta</label>
+                            <label ><input type="radio" name="feeling" value="Asesoramiento" checked>Asesoramiento</label>
 
                     </div>
 
                     <div class="form-txt-contact">
-                        <a href="t&c.html">Terminos y Condiciones</a>
+                        <a href="t&c.php">Terminos y Condiciones</a>
                     </div>
-                    <input type="submit" class="btn-contact">
+                    <input type="submit"  name="contact_user" class="btn-contact">
                 </div>
             </form>
 

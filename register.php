@@ -95,27 +95,7 @@
 
 <body>
 
-    <header>
-
-        <div class="menu">
-            <a href="#" class="logo">COLHOME</a>
-            <input type="checkbox" id="menu">
-            <label for="menu">
-                <img src="imgs/menu.png" class="menu-icono" alt="">
-            </label>
-            <nav class="navbar">
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="houses.html">Casas</a></li>
-                    <li><a href="about_us.html">Sobre Nosotros</a></li>
-                    <li><a href="contact.html">Contacto</a></li>
-                    
-                </ul>
-            </nav>
-            
-        </div>
-
-    </header>
+    <?php include('loyouts/header.php')?>
 
     <main>
         

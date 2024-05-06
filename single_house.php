@@ -2,8 +2,30 @@
 <?php
 
     include('server/connection.php');
+    session_start();
+    
 
-    if(isset($_GET['home_id'])){
+    if(isset($_POST['more-information'])){
+        if(isset($_SESSION['logged_in'])){
+            $user_id = $_SESSION['user_id'];
+            $user_email = $_SESSION['user_email'];
+            $user_message = $_POST['message'];
+            $homeId = (int)$_POST['home_id'];
+            
+            $stmt1 = $conn->prepare("INSERT INTO send_information (user_id,home_id,information_message)
+                                    VALUES (?,?,?) ");
+            $stmt1->bind_param('iis',$user_id,$homeId,$user_message);
+            
+            if($stmt1->execute()){
+                header('location: single_house.php?message=Mensaje enviado Pronto resiviras Informacion');
+            }else{
+                header('location: single_house.php?error=Ocurrio un error intenta enviar el mesaje de nuevo');
+            }
+        }else{
+            header('location: login.php');
+        }
+    }
+    else if(isset($_GET['home_id'])){
 
         $home_id = $_GET['home_id'];
         $stmt = $conn->prepare("SELECT * FROM houses WHERE home_id= ? ");
@@ -15,8 +37,8 @@
 
     }else{
         header('location: index.php');
+        echo $home_id;
     }
-
 
 ?>
 
@@ -37,26 +59,7 @@
 
 <body>
 
-    <header>
-        <div class="menu">
-            <a href="#" class="logo">COLHOME</a>
-            <input type="checkbox" id="menu">
-            <label for="menu">
-                <img src="imgs/menu.png" class="menu-icono" alt="">
-            </label>
-            <nav class="navbar">
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="houses.html">Casas</a></li>
-                    <li><a href="about_us.html">Sobre Nosotros</a></li>
-                    <li><a href="contact.html">Contacto</a></li>
-                    
-
-                </ul>
-            </nav>
-            <a class="btn-login" href="login.html">Login</a>
-        </div>
-    </header>
+    <?php include('loyouts/header.php')?>
 
 
     <main>
@@ -101,11 +104,12 @@
                     </div>
 
                 </div>
+                <?php $nueva= $home['home_id'];?>
             <?php }?>
-
+                
                 <div class="content-form-single-product">
                     <div class="form-single-house ">
-                        <form action="">
+                        <form action="single_house.php" method="post">
                             <h2>Pedir más Informacion</h2>
                             <div class="input-group">
 
@@ -116,7 +120,10 @@
                                 <div class="form-txt-contact">
                                     <a href="t&c.html">Terminos y Condiciones</a>
                                 </div>
-                                <input type="submit" class="btn-form-single-house" value="Enviar">
+                                <p style="color: rgb(102, 8, 8); font-size:16px;"><?php if(isset($_POST['more-information'])) {echo $_GET['error'];}?></p>
+                                <p style="color: rgb(102, 8, 8); font-size:16px;"><?php if(isset($_POST['more-information'])) {echo $_GET['message'];}?></p>
+                                <input type="hidden" name="home_id" value="<?php echo $nueva;?>">
+                                <input type="submit" class="btn-form-single-house" name="more-information" value="Enviar">
                             </div>
                         </form>
                     </div>
@@ -126,53 +133,7 @@
         </section>
     </main>
 
-
-
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col">
-                    <h4>Empresa</h4>
-                    <ul>
-                        <li><a href="about_us.html">Sobre nosotro</a></li>
-                        <li><a href="t&c.html">T&C</a></li>
-                        <li><a href="contact.html">Contacto</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Busquedas</h4>
-                    <ul>
-                        <li><a href="houses.html">Todos los resultados </a></li>
-                       
-                        <li><a href="houses.html">Mas Recientes</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Siguenos en </h4>
-                    <div class="social-media">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </footer>
-
-    <script>
-        window.onscroll = function () { scrollFunction() };
-
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                document.getElementById("menu").style.top = "0";
-            } else {
-                document.getElementById("menu").style.top = "-40px"; /* Altura de la barra de menú */
-            }
-        }
-    </script>
+    <?php include('loyouts/footer.php')?>
 
 </body>
 

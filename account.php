@@ -16,7 +16,7 @@
             unset($_SESSION['user_email']);
 
             header('location: login.php');
-
+            exit;
         }
     }
 
@@ -64,27 +64,8 @@
 </head>
 
 <body>
-    <header>
-        <div class="menu">
-            <a href="#" class="logo">COLHOME</a>
-            <input type="checkbox" id="menu">
-            <label for="menu">
-                <img src="imgs/menu.png" class="menu-icono" alt="">
-            </label>
-            <nav class="navbar">
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="houses.html">Casas</a></li>
-                    <li><a href="about_us.html">Sobre Nosotros</a></li>
-                    <li><a href="contact.html">Contacto</a></li>
-
-                </ul>
-            </nav>
-            <a class="btn-login" href="login.php">Login</a>
-        </div>
-
-
-    </header>
+ 
+    <?php include('loyouts/header.php')?>
 
     <main>
         <section class="content-account container ">
@@ -117,38 +98,7 @@
     </main>
 
 
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col">
-                    <h4>Empresa</h4>
-                    <ul>
-                        <li><a href="about_us.html">Sobre nosotro</a></li>
-                        <li><a href="t&c.html">T&C</a></li>
-                        <li><a href="contact.html">Contacto</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Busquedas</h4>
-                    <ul>
-                        <li><a href="houses.html">Todos los resultados </a></li>
-                        <li><a href="houses.html">Mas Recientes</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Siguenos en </h4>
-                    <div class="social-media">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </footer>
+    <?php include('loyouts/footer.php')?>
 </body>
 
 </html>

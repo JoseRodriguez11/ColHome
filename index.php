@@ -11,38 +11,19 @@
 
 <body>
 
-    <header>
-        <div class="menu">
-            <a href="#" class="logo">COLHOME</a>
-            <input type="checkbox" id="menu">
-            <label for="menu">
-                <img src="imgs/menu.png" class="menu-icono" alt="">
-            </label>
-            <nav class="navbar">
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="houses.html">Casas</a></li>
-                    <li><a href="about_us.html">Sobre Nosotros</a></li>
-                    <li><a href="contact.html">Contacto</a></li>
-                    
-                      
-                </ul>
-            </nav>
-            <a class="btn-login" href="login.html" >Login</a>
-        </div>
-        <div class="header">
+    <?php include('loyouts/header.php')?>
+    
+    <div class="header">
             <div class="header-content container">
                 <div class="header-txt">
                     <h1>Compra venta de casas</h1>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus explicabo ad dolorum? Illum
                         dolorum iure nisi animi, et vitae tenetur illo, corporis eveniet quia dolor alias doloribus fuga,
                         distinctio aut.</p>
-                    <a href="houses.html" class="btn-1">Ver más</a>
+                    <a href="houses.php" class="btn-1">Ver más</a>
                 </div>
             </div>
-        </div>
-
-    </header>
+    </div>
 
     <main>
         <section >
@@ -84,7 +65,7 @@
                     <p>Contamos con los mejores asesores que te pueden ayudar la mejor opcion de vivienda 
                         que se ajuste tanto a tu presupuesto como a tus necesidades 
                     </p>
-                    <a href="contact.html" class="btn-1">Contactanos</a>
+                    <a href="contact.php" class="btn-1">Contactanos</a>
                 </div>
 
             </div>
@@ -120,56 +101,11 @@
 
             <?php } ?>
             </div>
-            <a href="houses.html" class="btn">Ver mas </a>
+            <a href="houses.php" class="btn">Ver mas </a>
         </section>
     </main>
 
-
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col">
-                    <h4>Empresa</h4>
-                    <ul>
-                        <li><a href="about_us.html">Sobre nosotro</a></li>
-                        <li><a href="t&c.html">T&C</a></li>
-                        <li><a href="contact.html">Contacto</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Busquedas</h4>
-                    <ul>
-                        <li><a href="houses.html">Todos los resultados </a></li>
-                        <li><a href="houses.html">Mas Recientes</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Siguenos en </h4>
-                    <div class="social-media">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </footer>
-
-    <script>
-        window.onscroll = function() {scrollFunction()};
-      
-        function scrollFunction() {
-          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            document.getElementById("menu").style.top = "0";
-          } else {
-            document.getElementById("menu").style.top = "-40px"; /* Altura de la barra de menú */
-          }
-        }
-    </script>
-
+    <?php include('loyouts/footer.php')?>
 </body>
 
 </html>

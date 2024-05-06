@@ -517,13 +517,14 @@ hr{
     display: flex;
     justify-content: center;
     padding-top: 40px;
+    
   }
   
 .pagination a {
     color: black;
     float: left;
     padding: 8px 16px;
-    text-decoration: none;
+    font-size: 20px;
   }
   
 .pagination a.active {
@@ -536,6 +537,8 @@ hr{
     background-color: #ddd;
     border-radius: 5px;
   }
+
+
 
 
 /********************************************/
@@ -669,20 +672,20 @@ details[open] summary::before{
 /*contact*/
 
 .content-contact {
-    min-height: 110vh;
+    min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: space-around;
     align-items: center;
     
 }
 
 .information_contact{
-    min-width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
+   
     padding-top: 50px;
     
 }
@@ -691,12 +694,12 @@ details[open] summary::before{
     padding-top: 10px;
 }
 .content-contact form{
-    padding: 50px 55px ;
+    padding: 10px 40px ;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     text-align: center;
-    min-width: 400px;
-    
+    min-width: 25vw;
+    margin-top: 10px;
 }
 
 .form-txt-contact{
@@ -838,11 +841,11 @@ details[open] summary::before{
 }
 
 .slider-nav a{
-    width: .7rem;
-    height: .7rem;
+    width: .8rem;
+    height: .8rem;
     border-radius: 50%;
     background-color: white;
-    opacity: .75;
+
     transition: opacity ease 250ms;
 }
 
@@ -1001,9 +1004,9 @@ details[open] summary::before{
 }
 
 .container-dashboard  table{
-    font-size: 20px;
+    font-size: 18px;
     border: 1px solid rgba(102, 8, 8, .2) ;
-    min-width: 80vw;
+    min-width: 90vw;
     table-layout: fixed;
     border-collapse: collapse;
 }
@@ -1030,10 +1033,10 @@ details[open] summary::before{
 .btn-dasboard{
     color: #fffdfc;
     background: rgb(102, 8, 8);
-    padding: 10px 5px ;
+    padding: 10px 10px ;
     border: none;
     border-radius: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 .btn-editar {
@@ -1051,7 +1054,53 @@ details[open] summary::before{
     background-color: rgb(0, 0, 105)
 }
 
+/*form edit information*/
+.edit-home {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.edit-home form{
+    padding: 40px 40px ;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    text-align: center;
+    min-width: 80vw;
+    margin-top: 100px;
+}
 
+.edit-home label{
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.edit-home input,textarea,select,option{
+    padding: 10px 10px ;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    border: 2px solid #ece6e6;
+    outline: none;
+}
+
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.btn-edit-home{
+    font-size: 16px;
+    max-width: 200px;
+    color: #fffdfc;
+    border: 0;
+    border-radius: 25px;
+    background-color: rgb(102, 8, 8);
+    box-shadow: 0 0 20px rgba(102, 8, 8, .5);
+    cursor: pointer;
+}
 /********************************************/
 @media  (max-width:991px){
     .menu{

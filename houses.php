@@ -1,45 +1,100 @@
 <?php
 
-    include('server/connection.php');
+include('server/connection.php');
 
-    if(isset($_POST['search'])){
+if (isset($_POST['search'])) {
 
-        $category = $_POST['category'];
-        $price = $_POST['price'];
-        $city = $_POST['city'];
-        if ($category === "todas" ){
-            $stmt = $conn->prepare("SELECT * FROM houses ");
+    $category = $_POST['category'];
+    $price = $_POST['price'];
+    $city = $_POST['city'];
 
-            $stmt->execute();
-        
-            $hauses = $stmt->get_result();
-        }
-        else if($city === null || $city ===''){
-            $stmt = $conn->prepare("SELECT * FROM houses WHERE home_category=? AND home_price<=? ");
-
-            $stmt->bind_param('si',$category,$price);
-            $stmt->execute();
-    
-            $hauses = $stmt->get_result();
-           
-        }else{
-            $stmt = $conn->prepare("SELECT * FROM houses WHERE home_category=? AND home_price<=? AND home_city=?");
-
-            $stmt->bind_param('sis',$category,$price,$city);
-            $stmt->execute();
-    
-            $hauses = $stmt->get_result();
-        }
-
-
-    }else{
-        $stmt = $conn->prepare("SELECT * FROM houses ");
-
-        $stmt->execute();
-    
-        $hauses = $stmt->get_result();
+    if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
+        $page_no = $_GET['page_no'];
+    } else {
+        $page_no = 1;
     }
- 
+
+     if ($city === null || $city === '') {
+        //se obtine el numeros de registros que tenemos en la BD
+        $stmt1 = $conn->prepare("SELECT COUNT(*)  As total_houses FROM houses WHERE home_category=? AND home_price<=? ");
+        $stmt1->bind_param('si', $category, $price);
+        $stmt1->execute();
+        $stmt1->bind_result($total_houses);
+        $stmt1->store_result();
+        $stmt1->fetch();
+        
+        //productos por pagina
+        $total_houses_per_page = 6;
+        $offset = ($page_no - 1) * $total_houses_per_page;
+        echo $offset;
+        $previus_page = $page_no - 1;
+        $next_page = $page_no + 1;
+
+
+        $total_no_of_pages = ceil($total_houses / $total_houses_per_page);
+
+        //se obtienen todos los productos
+        $stmt2 = $conn->prepare("SELECT * FROM houses WHERE home_category=? AND home_price<=? LIMIT $total_houses_per_page");
+        $stmt2->bind_param('si', $category, $price);
+        $stmt2->execute();
+        $houses = $stmt2->get_result();
+        
+    } else {
+         //se obtine el numeros de registros que tenemos en la BD
+        $stmt1 = $conn->prepare("SELECT COUNT(*)  As total_houses FROM houses WHERE home_category=? AND home_price<=? AND home_city=?");
+        $stmt1->bind_param('sis', $category, $price,$city);
+        $stmt1->execute();
+        $stmt1->bind_result($total_houses);
+        $stmt1->store_result();
+        $stmt1->fetch();
+        
+        //productos por pagina
+        $total_houses_per_page = 6;
+        $offset = ($page_no - 1) * $total_houses_per_page;
+        echo $offset;
+        $previus_page = $page_no - 1;
+        $next_page = $page_no + 1;
+
+
+        $total_no_of_pages = ceil($total_houses / $total_houses_per_page);
+
+        //se obtienen todos los productos
+        $stmt2 = $conn->prepare("SELECT * FROM houses WHERE home_category=? AND home_price<=? AND home_city=? LIMIT $offset,$total_houses_per_page ");
+        $stmt2->bind_param('sis', $category, $price,$city);
+        $stmt2->execute();
+        $houses = $stmt2->get_result();
+    }
+} else {
+
+    if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
+        $page_no = $_GET['page_no'];
+    } else {
+        $page_no = 1;
+    }
+
+    //se obtine el numeros de registros que tenemos en la BD
+    $stmt1 = $conn->prepare("SELECT COUNT(*)  As total_houses FROM houses ");
+    $stmt1->execute();
+    $stmt1->bind_result($tota_houses);
+    $stmt1->store_result();
+    $stmt1->fetch();
+
+    //productos por pagina
+    $total_houses_per_page = 6;
+    $offset = ($page_no - 1) * $total_houses_per_page;
+    echo $offset;
+    $previus_page = $page_no - 1;
+    $next_page = $page_no + 1;
+
+
+    $total_no_of_pages = ceil($tota_houses / $total_houses_per_page);
+
+    //se obtienen todos los productos
+    $stmt2 = $conn->prepare("SELECT * FROM houses LIMIT $offset,$total_houses_per_page");
+    $stmt2->execute();
+    $houses = $stmt2->get_result();
+}
+
 
 
 
@@ -60,34 +115,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casas</title>
     <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
 
-    <header>
-
-        <div class="menu">
-            <a href="#" class="logo">COLHOME</a>
-            <input type="checkbox" id="menu">
-            <label for="menu">
-                <img src="imgs/menu.png" class="menu-icono" alt="">
-            </label>
-            <nav class="navbar">
-                <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="houses.html">Casas</a></li>
-                    <li><a href="about_us.html">Sobre Nosotros</a></li>
-                    <li><a href="#">Contacto</a></li>
-                    
-
-                </ul>
-            </nav>
-            <a class="btn-login" href="login.html">Login</a>
-        </div>
-
-    </header>
+    <?php include('loyouts/header.php') ?>
 
     <main>
         <section class="container">
@@ -97,129 +130,95 @@
                     <hr>
                 </div>
             </div>
-            
+
             <div class="container">
                 <aside class="content-aside">
                     <form class="content-form-serch" action="houses.php" method="post">
                         <div class="aside-column">
                             <h3>Clasificación</h3>
                             <label for="">Precio</label>
-                            <input type="range" min="100000000" max="2000000000" name="price" value="2000000000">
+                            <input type="range" min="100000000" max="2000000000" name="price" value="<?php if(isset($price) ) {echo $price;} else {echo "2000000000";}?>">
                             <div class="limit-prices">
-                                <span >100.000.000</span>
+                                <span>100.000.000</span>
                                 <span>2.000.000.000</span>
                             </div>
                         </div>
                         <div class="aside-column">
                             <h3>Categorias</h3>
                             <div class="checkbox">
-                                <label ><input type="radio" name="category" id="category_one" value="casa" >Casa</label>
+                                <label><input type="radio" name="category" id="category_one" value="casa" <?php if(isset($category) && $category=='casa'){echo 'checked';} ?>>Casa</label>
                             </div>
                             <div class="checkbox">
-                                <label ><input type="radio" name="category" id="category_two" value="apartamento" >Apartamento</label>
+                                <label><input type="radio" name="category" id="category_two" value="apartamento" <?php if(isset($category) && $category=='apartamento'){echo 'checked';} ?>>Apartamento</label>
                             </div>
                             <div class="checkbox">
-                                <label ><input type="radio" name="category"  id="category_three" value="finca" >Finca</label>
+                                <label><input type="radio" name="category" id="category_three" value="finca" <?php if(isset($category) && $category=='finca'){echo 'checked';} ?>>Finca</label>
                             </div>
-                            <div class="checkbox">
-                                <label ><input type="radio" name="category" value="todas" id="category_four" checked>Todas</label>
-                            </div>
+
                         </div>
                         <div class="aside-column">
                             <h3>Ciudad</h3>
-                            <input type="text" name="city"  >
+                            <input type="text" name="city">
                         </div>
                         <div class="aside-column">
                             <input type="submit" name="search" value="Buscar" class="btn">
                         </div>
                     </form>
-                    
-                    
+
+
                 </aside>
             </div>
 
             <div class="card-container">
-                <p style="color: rgb(102, 8, 8); font-size:30px;"><?php  if($hauses->fetch_assoc() == 0) {echo "NO se encontraron resultados";}?></p>
-                <?php while($row = $hauses->fetch_assoc()) { ?>
-                        
-                        <figure class="card">
-                            <div class="card-image">
-                                <img src="imgs/<?php echo $row['home_image1']; ?>" alt="Imagen">
-                            </div>
-                            <div class="card-info">
-                                <h2><?php echo $row['home_category']; ?></h2>
-                                <h3>$<?php echo $row['home_price']; ?></h3>
-                                <h3><?php echo $row['home_city']; ?> <span>&#8226</span> <?php echo $row['home_location']; ?></h3>
-                                <h3><?php echo $row['home_neighborhood']; ?></strong></h3>
-                                <p><strong>Descripción:</strong> <?php echo $row['home_description']; ?></p>
-                                <a href="<?php echo "single_house.php?home_id=".$row['home_id']; ?>" class="card-btn">Ver</a>
-                            </div>
-                        </figure>
-                <?php }?>
+                <p style="color: rgb(102, 8, 8); font-size:30px;"><?php if ($houses->fetch_assoc() == 0) {
+                                                                        echo "NO se encontraron resultados";
+                                                                    } ?></p>
+                <?php while ($row = $houses->fetch_assoc()) { ?>
+
+                    <figure class="card">
+                        <div class="card-image">
+                            <img src="imgs/<?php echo $row['home_image1']; ?>" alt="Imagen">
+                        </div>
+                        <div class="card-info">
+                            <h2><?php echo $row['home_category']; ?></h2>
+                            <h3>$<?php echo $row['home_price']; ?></h3>
+                            <h3><?php echo $row['home_city']; ?> <span>&#8226</span> <?php echo $row['home_location']; ?></h3>
+                            <h3><?php echo $row['home_neighborhood']; ?></strong></h3>
+                            <p><strong>Descripción:</strong> <?php echo $row['home_description']; ?></p>
+                            <a href="<?php echo "single_house.php?home_id=" . $row['home_id']; ?>" class="card-btn">Ver</a>
+                        </div>
+                    </figure>
+                <?php } ?>
             </div>
 
         </section>
 
         <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#" class="active">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">6</a>
-            <a href="#">&raquo;</a>
+            <a href=" <?php if ($page_no <= 1) {
+                            echo "#";
+                        } else {
+                            echo "?page_no=" . ($page_no - 1);
+                        } ?>">&laquo;</a>
+
+            <a href="?page_no=1">1</a>
+            <a href="?page_no=2">2</a>
+            <?php if ($page_no >= 3) { ?>
+                <a href="#">...</a>
+                <a href="<?php echo "?page_no=" . $page_no; ?>"><?php echo $page_no; ?></a>
+            <?php } ?>
+            
+            <a href=" <?php if ($page_no >= $total_no_of_pages) {
+                            echo "#";
+                        } else {
+                            echo "?page_no=" . ($page_no + 1);
+                        } ?>">&raquo;</a>
         </div>
 
     </main>
 
 
 
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col">
-                    <h4>Empresa</h4>
-                    <ul>
-                        <li><a href="about_us.html">Sobre nosotro</a></li>
-                        <li><a href="t&c.html">T&C</a></li>
-                        <li><a href="contact.html">Contacto</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Busquedas</h4>
-                    <ul>
-                        <li><a href="houses.html">Todos los resultados </a></li>
-                        
-                        <li><a href="houses.html">Mas Recientes</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Siguenos en </h4>
-                    <div class="social-media">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </footer>
-
-    <script>
-        window.onscroll = function() {scrollFunction()};
-      
-        function scrollFunction() {
-          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            document.getElementById("menu").style.top = "0";
-          } else {
-            document.getElementById("menu").style.top = "-40px"; /* Altura de la barra de menú */
-          }
-        }
-    </script>
+    <?php include('loyouts/footer.php') ?>
 
 </body>
 
